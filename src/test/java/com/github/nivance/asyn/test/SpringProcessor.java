@@ -18,6 +18,8 @@ public class SpringProcessor extends BizProcessor {
 	
 	@Autowired
 	private AsynTaskContainer asynTaskContainer;
+	@Autowired
+	private BizProcessor2 bizProcessor;
 	
 	public void process(String str, Integer i) {
 		long start = System.currentTimeMillis();
@@ -53,5 +55,16 @@ public class SpringProcessor extends BizProcessor {
 		long end = System.currentTimeMillis();
 		log.info("4 task cost:" + (end - start) + "ms");
 	}
-		
+	
+	public Integer executeF1(String str) {
+		try {
+			log.info(Thread.currentThread().getName() + " executeF1~~~~~~~~~1");
+			Thread.sleep(200);
+			bizProcessor.doAction(str);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return 1;
+	}
+	
 }
